@@ -1,0 +1,37 @@
+// Define pin connections
+const int irSensorPin = 8;   // IR sensor output pin
+const int buzzerPin = 9;     // Buzzer pin
+const int ledPin = 10;       // LED pin
+
+void setup()
+{
+  pinMode(irSensorPin, INPUT);   // Set IR sensor pin as input
+  pinMode(buzzerPin, OUTPUT);    // Set buzzer pin as output
+  pinMode(ledPin, OUTPUT);       // Set LED pin as output
+
+  Serial.begin(9600);            // Initialize Serial Monitor
+}
+
+void loop()
+{
+  int irValue = digitalRead(irSensorPin); // Read IR sensor
+
+  if (irValue == HIGH)
+  {
+    // Intruder detected
+    digitalWrite(buzzerPin, HIGH);
+    digitalWrite(ledPin, HIGH);
+
+    Serial.println("Intruder Detected!");
+  }
+  else
+  {
+    // No intruder
+    digitalWrite(buzzerPin, LOW);
+    digitalWrite(ledPin, LOW);
+
+    Serial.println("No Intruder");
+  }
+
+  delay(1000); // Delay for 1 second
+}
