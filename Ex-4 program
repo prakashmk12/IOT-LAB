@@ -1,0 +1,46 @@
+BASIC BURGLAR ALERT SECURITY SYSTEM 
+
+Aim:
+  tu bol diya basic burgler security system with the help of IR sensor and buzzer/LED pattern using arduino 
+
+ // Define pin connections
+const int irSensorPin = 8;  // IR sensor output pin
+const int buzzerPin = 9;    // Buzzer pin
+const int ledPin = 10;      // LED pin
+
+void setup()
+{
+  pinMode(irSensorPin, INPUT);
+  pinMode(buzzerPin, OUTPUT);
+  pinMode(ledPin, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int irValue = digitalRead(irSensorPin);
+
+  if (irValue == HIGH)
+  {
+    // Intruder detected
+    digitalWrite(buzzerPin, HIGH);
+    digitalWrite(ledPin, HIGH);
+
+    Serial.println("Intruder detected!");
+
+    delay(1000);
+  }
+  else
+  {
+    // No intruder
+    digitalWrite(buzzerPin, LOW);
+    digitalWrite(ledPin, LOW);
+
+    Serial.println("No Intruder");
+
+    delay(1000);
+  }
+
+  delay(1000);
+}
