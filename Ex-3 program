@@ -1,0 +1,57 @@
+CALCULATING THE DISTANCE USING ULTRASONIC SENSOR 
+
+Aim:
+  to calculate the distance to an object with the help of ultrasonic sensor and display it on and LCD missing using
+
+#include <LiquidCrystal.h>
+
+// Initialize the LCD pins: RS, E, D4, D5, D6, D7
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// Ultrasonic sensor pins
+const int trigPin = 9;
+const int echoPin = 10;
+
+void setup()
+{
+  lcd.begin(16, 2);
+
+  // Set sensor pins
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  // Display static text
+  lcd.print("Distance:");
+}
+
+void loop()
+{
+  long duration;
+  float distance;
+
+  // Send a 10-microsecond pulse
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+
+  digitalWrite(trigPin, LOW);
+
+  // Read echo duration
+  duration = pulseIn(echoPin, HIGH);
+
+  // Calculate distance in cm
+  distance = duration * 0.034 / 2;
+
+  // Display distance on LCD
+  lcd.setCursor(0, 1);
+  lcd.print("                ");
+
+  lcd.setCursor(0, 1);
+  lcd.print(distance);
+  lcd.print(" cm");
+
+  // Update every 500ms
+  delay(500);
+}
