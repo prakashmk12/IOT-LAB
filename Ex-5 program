@@ -1,0 +1,40 @@
+AUTOMATED LED LIGHT CONTROL 
+
+Aim:
+to create automated LED light control based on LDR input using arduino
+
+const int ldrPin = A0;       // Analog pin
+const int ledPin = 9;        // LED digital pin
+
+int ldrValue = 0;             // LDR reading
+const int threshold = 500;    // Light threshold
+
+void setup()
+{
+  pinMode(ledPin, OUTPUT);    // LED output
+
+  Serial.begin(9600);          // Serial Monitor
+}
+
+void loop()
+{
+  ldrValue = analogRead(ldrPin);  // Read LDR value (0-1023)
+
+  Serial.print("LDR Value: ");
+  Serial.println(ldrValue);
+
+  if (ldrValue < threshold)
+  {
+    // Turn ON LED in darkness
+    digitalWrite(ledPin, HIGH);
+    Serial.println("LED ON");
+  }
+  else
+  {
+    // Turn OFF LED in bright light
+    digitalWrite(ledPin, LOW);
+    Serial.println("LED OFF");
+  }
+
+  delay(200);
+}
